@@ -181,12 +181,22 @@ topPlayers( guid )
 
         level.TSTopPlayers = [];
 
-        for( i = 0; i < size; i++ )
+        if( size > 1 )
         {
-                level.TSTopPlayers[ i ] = [];
-                level.TSTopPlayers[ i ][ 0 ] = result[ i ][ "id" ];
-                if( isDefined( result[ i ][ "skill" ] ) )
-                        level.TSTopPlayers[ i ][ 1 ] = float( result[ i ][ "skill" ] );
+                for( i = 0; i < size; i++ )
+                {
+                        level.TSTopPlayers[ i ] = [];
+                        level.TSTopPlayers[ i ][ 0 ] = result[ i ][ "id" ];
+                        if( isDefined( result[ i ][ "skill" ] ) )
+                                level.TSTopPlayers[ i ][ 1 ] = float( result[ i ][ "skill" ] );
+                }
+        }
+        else if( size == 1 )
+        {
+                level.TSTopPlayers[ 0 ] = [];
+                level.TSTopPlayers[ 0 ][ 0 ] = result[ "id" ];
+                if( isDefined( result[ "skill" ] ) )
+                        level.TSTopPlayers[ 0 ][ 1 ] = float( result[ "skill" ] );
         }
 }
 
