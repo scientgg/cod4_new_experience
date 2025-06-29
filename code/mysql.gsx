@@ -181,7 +181,8 @@ topPlayers( guid )
 	
 	for( i = 0; i < size; i++ )
 	{
-		level.TSTopPlayers[ i ][ 0 ] = result[ i ][ "id" ];
+		level.TSTopPlayers[ i ][ 0 ] = result[ i ][ 0 ];
+		level.TSTopPlayers[ i ][ 1 ] = float( result[ i ][ 1 ] );
 	}
 }
 
