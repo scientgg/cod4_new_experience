@@ -168,30 +168,21 @@ saveRank()
 
 topPlayers( guid )
 {
-    while( !isDefined( game[ "mysql" ] ) )
-        wait .05;
+	while( !isDefined( game[ "mysql" ] ) )
+		wait .05;
 
-    query = "SELECT id, skill FROM `" + level.dvar[ "mysql_trueskill_table" ] + "` ORDER BY skill DESC LIMIT 3";
-    mysql_query( game[ "mysql" ], query );
-
-    size = mysql_num_rows( game[ "mysql" ] );
-    result = mysql_fetch_rows( game[ "mysql" ] );
-
-    for ( i = 0; i < 3; i++ )
-    {
-        level.TSTopPlayers[i] = []; // Always define as array
-
-        if (i < size && isArray(result[i]) && result[i].size > 1)
-        {
-            level.TSTopPlayers[i][0] = result[i][0];                // id
-            level.TSTopPlayers[i][1] = float(result[i][1]);         // skill
-        }
-        else
-        {
-            level.TSTopPlayers[i][0] = "";                         // no id
-            level.TSTopPlayers[i][1] = 0;                          // no skill
-        }
-    }
+	query = "SELECT * FROM `" + level.dvar[ "mysql_trueskill_table" ] + "` ORDER BY `skill` DESC LIMIT 3";
+	
+	mysql_query( game[ "mysql" ], query );
+	
+	size = mysql_num_rows( game[ "mysql" ] );
+	
+	result = mysql_fetch_rows( game[ "mysql" ] );
+	
+	for( i = 0; i < size; i++ )
+	{
+		level.TSTopPlayers[ i ][ 0 ] = result[ i ][ "id" ];
+	}
 }
 
 #if isSyscallDefined TS_Rate
